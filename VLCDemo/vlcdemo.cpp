@@ -71,13 +71,11 @@ VLCDemo::VLCDemo(QWidget *parent)
 
 
     view = libvlc_video_new_viewpoint();
-
-
-//     view->f_yaw = 0;
-//     view->f_pitch = 0;
-//     view->f_roll = 0;
-//     view->f_field_of_view;
-//     libvlc_video_update_viewpoint(mp, view, true);
+    view->f_yaw = 0;
+    view->f_pitch = 0;
+    view->f_roll = 0;
+    view->f_field_of_view = 180;
+    libvlc_video_update_viewpoint(mp, view, true);
 
 
     //libvlc无法响应鼠标消息  https://blog.jianchihu.net/player-based-on-libvlc.html
@@ -97,70 +95,6 @@ VLCDemo::~VLCDemo()
     libvlc_release(inst);
 }
 
-void VLCDemo::UpdateInterface()
-{
-    if (libvlc_media_player_get_state(mp) == libvlc_Ended)
-    {
-        libvlc_media_player_play(mp);
-    }
-
-    //ui.widget_play->setEnabled(false);
-}
-
-void VLCDemo::on_pushbutton_1_clicked()
-{
-    view->f_yaw += 3;
-    if (view->f_yaw > 180)
-    {
-        view->f_yaw = -180;
-    }
-
-    libvlc_video_update_viewpoint(mp, view, true);
-}
-
-void VLCDemo::on_pushbutton_2_clicked()
-{
-    view->f_pitch += 3;
-    if (view->f_pitch > 90)
-    {
-        view->f_pitch = -90;
-    }
-
-    libvlc_video_update_viewpoint(mp, view, true);
-}
-
-void VLCDemo::on_pushbutton_3_clicked()
-{
-    view->f_roll += 3;
-    if (view->f_roll > 180)
-    {
-        view->f_roll = -180;
-    }
-
-    libvlc_video_update_viewpoint(mp, view, true);
-}
-
-void VLCDemo::on_pushbutton_4_clicked()
-{
-    view->f_field_of_view += 3;
-    if (view->f_field_of_view > 180)
-    {
-        view->f_field_of_view = 0;
-    }
-
-    libvlc_video_update_viewpoint(mp, view, true);
-}
-
-void VLCDemo::on_pushbutton_5_clicked()
-{
-
-}
-
-void VLCDemo::on_pushbutton_6_clicked()
-{
-
-}
-
 void VLCDemo::mousePressEvent(QMouseEvent *event)
 {
     //qDebug() << "VLCDemo::mousePressEvent";
@@ -169,7 +103,6 @@ void VLCDemo::mousePressEvent(QMouseEvent *event)
     QPoint pos_preview_topleft = ui.widget_play->mapToGlobal(QPoint(0, 0));
     QPoint pos_preview_bottomright = ui.widget_play->mapToGlobal(QPoint(ui.widget_play->width(), ui.widget_play->height()));
     QRect rect_preview = QRect(pos_preview_topleft, pos_preview_bottomright);
-
 
     if (rect_preview.contains(pos_event))
     {

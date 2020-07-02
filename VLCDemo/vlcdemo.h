@@ -20,15 +20,7 @@ class VLCDemo : public QMainWindow
 public:
     VLCDemo(QWidget *parent = Q_NULLPTR);
     ~VLCDemo();
-private:
-    void UpdateInterface();
-private slots:
-    void on_pushbutton_1_clicked();
-    void on_pushbutton_2_clicked();
-    void on_pushbutton_3_clicked();
-    void on_pushbutton_4_clicked();
-    void on_pushbutton_5_clicked();
-    void on_pushbutton_6_clicked();
+
 protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
