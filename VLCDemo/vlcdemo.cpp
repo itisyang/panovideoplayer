@@ -28,7 +28,11 @@ VLCDemo::VLCDemo(QWidget *parent)
     //m = libvlc_media_new_path (inst, "/path/to/test.mov");
 
 
-
+    if (!inst)
+    {
+        const char* msg = libvlc_errmsg();
+        std::cout << msg << endl;
+    }
 
 
     ml = libvlc_media_list_new(this->inst);
